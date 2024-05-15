@@ -1,10 +1,11 @@
 package org.example;
+
 import java.util.List;
 import java.util.ArrayList;
+
 public class Main {
 
     public static final double GOAL_NUMBER = 500_000.00;
-
 
     public static void main(String[] args) {
         System.out.println("Hello five!");
@@ -27,7 +28,7 @@ public class Main {
 
         );
 
-// Add the object to the ArrayList
+        // Add the object to the ArrayList
         System.out.println(newIncomeStream);
         System.out.println(incomeStreams);
 
@@ -36,7 +37,6 @@ public class Main {
         incomeStreams.add(newIncomeStream);
 
         System.out.println(incomeStreams);
-
 
         // Calculate total estimated earnings
         double totalEarnings = 0.0;
@@ -48,7 +48,6 @@ public class Main {
         System.out.println("This is what I am earning: $" + totalEarnings +
                 "This is what I am aiming to make: $" + GOAL_NUMBER);
 
-
         // Calculate percentage (handle potential division by zero)
         double percentage = (totalEarnings / GOAL_NUMBER) * 100.0;
         if (GOAL_NUMBER == 0) {
@@ -56,18 +55,11 @@ public class Main {
         }
 
         // Format and print the percentage with two decimal places
-        System.out.println("You are %.2f%% towards your goal."+ percentage);
+        System.out.println("You are %.2f%% towards your goal." + percentage);
 
         // Calculate the distance (ensure non-negative value)
         double distance = Math.max(0.0, GOAL_NUMBER - totalEarnings);
-        System.out.println("You are still $%.2f away from your goal.\n"+ distance);
+        System.out.println("You are still $%.2f away from your goal.\n" + distance);
 
     }
 }
-
-
-
-
-
-
-
