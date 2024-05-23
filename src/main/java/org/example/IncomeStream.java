@@ -1,8 +1,8 @@
 package org.example;
+
 import java.util.Date;
 
 public class IncomeStream {
-
 
     // Use primitive data types for basic information like ID
     private long id;
@@ -91,6 +91,4 @@ public class IncomeStream {
     public void setDescription(String description) {
         this.description = description;
     }
-
-
 }
