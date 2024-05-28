@@ -7,10 +7,14 @@ import java.net.http.HttpRequest;
 import java.net.http.HttpResponse;
 
 public class IncomeStreamApi {
+
     private static final String BASE_URL = "http://localhost:8080/income-streams";
     private static final HttpClient httpClient = HttpClient.newBuilder().build();
 
-    // Method to create a new income stream
+    private IncomeStreamApi() {
+        throw new UnsupportedOperationException("This is a utility class and cannot be instantiated");
+    }
+
     public static void createIncomeStream(double estimatedEarningsPerYear, String source, String name,
             String description) {
         String jsonPayload = String.format(
@@ -23,10 +27,11 @@ public class IncomeStreamApi {
                 .POST(HttpRequest.BodyPublishers.ofString(jsonPayload))
                 .build();
 
+        System.out.println(request);
+
         sendHttpRequest(request);
     }
 
-    // Method to update an existing income stream
     public static void updateIncomeStream(long id, double estimatedEarningsPerYear, String source, String name,
             String description) {
         String jsonPayload = String.format(
@@ -42,7 +47,6 @@ public class IncomeStreamApi {
         sendHttpRequest(request);
     }
 
-    // Method to delete an existing income stream
     public static void deleteIncomeStream(long id) {
         HttpRequest request = HttpRequest.newBuilder()
                 .uri(URI.create(BASE_URL + "/" + id))
@@ -52,7 +56,6 @@ public class IncomeStreamApi {
         sendHttpRequest(request);
     }
 
-    // Helper method to send HTTP request
     private static void sendHttpRequest(HttpRequest request) {
         try {
             HttpResponse<String> response = httpClient.send(request, HttpResponse.BodyHandlers.ofString());

@@ -1,12 +1,21 @@
 package org.example;
 
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.CommandLineRunner;
+import org.springframework.stereotype.Component;
+
 import java.util.ArrayList;
 
-public class Main {
+@Component
+public class Main implements CommandLineRunner {
 
     public static final double GOAL_NUMBER = 500_000.00;
 
-    public static void main(String[] args) {
+    @Autowired
+    private IncomeStreamService service;
+
+    @Override
+    public void run(String... args) {
         System.out.println("Hello five!");
 
         IncomeStream stream1 = new IncomeStream(10000.00, "Natgo", "Job", "java job");
@@ -46,24 +55,16 @@ public class Main {
         if (GOAL_NUMBER == 0) {
             percentage = 0.0; // Avoid division by zero
         }
-        System.out.println("You are %.2f%% towards your goal." + percentage);
+        System.out.println("You are " + percentage + "% towards your goal.");
 
         double distance = Math.max(0.0, GOAL_NUMBER - totalEarnings);
-        System.out.println("You are still $%.2f away from your goal.\n" + distance);
+        System.out.println("You are still " + distance + " away from your goal.\n");
 
-        IncomeStreamApi.createIncomeStream(30000.00, "New Source", "New Name", "New Description");
+        service.createIncomeStream(new IncomeStream(30000.00, "New Source", "New Name", "New Description"));
 
-        IncomeStreamApi.updateIncomeStream(1, 25000.00, "Updated Source", "Updated Name", "Updated Description");
+        service.updateIncomeStream(1L,
+                new IncomeStream(25000.00, "Updated Source", "Updated Name", "Updated Description"));
 
-        IncomeStreamApi.deleteIncomeStream(0);
-
-    }
-
-    private static double calculateTotalEstimatedEarnings(ArrayList<IncomeStream> incomeStreams) {
-        double totalEarnings = 0.0;
-        for (IncomeStream incomeStream : incomeStreams) {
-            totalEarnings += incomeStream.getEstimatedEarningsPerYear();
-        }
-        return totalEarnings;
+        service.deleteIncomeStream(1L);
     }
 }

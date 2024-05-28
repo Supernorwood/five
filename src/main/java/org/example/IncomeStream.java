@@ -1,23 +1,24 @@
 package org.example;
 
+import lombok.Getter;
+import lombok.Setter;
+
 import java.util.Date;
 
+@Getter
+@Setter
 public class IncomeStream {
 
-    // Use primitive data types for basic information like ID
     private long id;
-
-    // Use java.util.Date for timestamps
     private Date insertDate;
     private Date updateDate;
-
-    // Use double for monetary values
     private double estimatedEarningsPerYear;
-
-    // Use String for text information
     private String source;
     private String name;
     private String description;
+
+    public IncomeStream() {
+    }
 
     public IncomeStream(double estimatedEarningsPerYear, String source, String name, String description) {
         this.estimatedEarningsPerYear = estimatedEarningsPerYear;
@@ -29,66 +30,13 @@ public class IncomeStream {
     @Override
     public String toString() {
         return "IncomeStream{" +
-                "estimatedEarningsPerYear=" + estimatedEarningsPerYear +
+                "id=" + id +
+                ", insertDate=" + insertDate +
+                ", updateDate=" + updateDate +
+                ", estimatedEarningsPerYear=" + estimatedEarningsPerYear +
                 ", source='" + source + '\'' +
                 ", name='" + name + '\'' +
                 ", description='" + description + '\'' +
                 '}';
-    }
-
-    public long getId() {
-        return id;
-    }
-
-    public void setId(long id) {
-        this.id = id;
-    }
-
-    public Date getInsertDate() {
-        return insertDate;
-    }
-
-    public void setInsertDate(Date insertDate) {
-        this.insertDate = insertDate;
-    }
-
-    public Date getUpdateDate() {
-        return updateDate;
-    }
-
-    public void setUpdateDate(Date updateDate) {
-        this.updateDate = updateDate;
-    }
-
-    public double getEstimatedEarningsPerYear() {
-        return estimatedEarningsPerYear;
-    }
-
-    public void setEstimatedEarningsPerYear(double estimatedEarningsPerYear) {
-        this.estimatedEarningsPerYear = estimatedEarningsPerYear;
-    }
-
-    public String getSource() {
-        return source;
-    }
-
-    public void setSource(String source) {
-        this.source = source;
-    }
-
-    public String getName() {
-        return name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
-    }
-
-    public String getDescription() {
-        return description;
-    }
-
-    public void setDescription(String description) {
-        this.description = description;
     }
 }
