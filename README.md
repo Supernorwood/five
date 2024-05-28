@@ -1,5 +1,3 @@
-Here's the updated README with the latest changes and detailed steps on how to run the code:
-
 ## Write Code, Get Money, Repeat
 
 Tracking income across streams can be a chore. That's why I built the Half a Milli Dashboard.
