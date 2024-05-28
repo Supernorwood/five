@@ -51,8 +51,8 @@ It's more than a paycheck tracker; it's about intention and action.
 1. **Clone the Repository:**
 
    ```bash
-   git clone [[https://github.com/Supernorwood/five](https://github.com/Supernorwood/five)]
-   cd [five]
+   git clone https://github.com/Supernorwood/five
+   cd five
    ```
 
 2. **Build the Project:**
@@ -97,4 +97,4 @@ It's more than a paycheck tracker; it's about intention and action.
 
 ## Follow the Execution:
 
-- GitHub: [[Supernorwood](https://github.com/Supernorwood/five)]
+- GitHub: [Supernorwood](https://github.com/Supernorwood/five)
