@@ -1,3 +1,5 @@
+Here's the updated README with the latest changes and detailed steps on how to run the code:
+
 ## Write Code, Get Money, Repeat
 
 Tracking income across streams can be a chore. That's why I built the Half a Milli Dashboard.
@@ -49,8 +51,8 @@ It's more than a paycheck tracker; it's about intention and action.
 1. **Clone the Repository:**
 
    ```bash
-   git clone [link to your GitHub repo]
-   cd [repository name]
+   git clone [[https://github.com/Supernorwood/five](https://github.com/Supernorwood/five)]
+   cd [five]
    ```
 
 2. **Build the Project:**
@@ -92,3 +94,7 @@ It's more than a paycheck tracker; it's about intention and action.
    ```bash
    curl -X DELETE "http://localhost:8080/income-streams/1"
    ```
+
+## Follow the Execution:
+
+- GitHub: [[Supernorwood](https://github.com/Supernorwood/five)]
