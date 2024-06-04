@@ -7,6 +7,7 @@ import java.util.Date;
 import java.util.List;
 import java.util.Optional;
 import java.util.concurrent.atomic.AtomicLong;
+import java.util.stream.Collectors;
 
 @Service
 public class IncomeStreamService {
@@ -51,5 +52,11 @@ public class IncomeStreamService {
         System.out.println("Income Stream deleted with Id: " + id);
         System.out.println(incomeStreams.removeIf(stream -> stream.getId() == id));
         return incomeStreams.removeIf(stream -> stream.getId() == id);
+    }
+
+    public List<IncomeStream> getIncomeStreamsByMinEarnings(double minEarnings) {
+        return incomeStreams.stream()
+                .filter(stream -> stream.getEstimatedEarningsPerYear() >= minEarnings)
+                .collect(Collectors.toList());
     }
 }

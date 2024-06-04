@@ -25,6 +25,11 @@ public class IncomeStreamController {
         return incomeStream.map(ResponseEntity::ok).orElseGet(() -> ResponseEntity.notFound().build());
     }
 
+    @GetMapping("/filter")
+    public List<IncomeStream> getIncomeStreamsByMinEarnings(@RequestParam double minEarnings) {
+        return service.getIncomeStreamsByMinEarnings(minEarnings);
+    }
+
     @PostMapping
     public IncomeStream createIncomeStream(@RequestBody IncomeStream incomeStream) {
         return service.createIncomeStream(incomeStream);

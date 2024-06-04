@@ -5,6 +5,7 @@ import org.springframework.boot.CommandLineRunner;
 import org.springframework.stereotype.Component;
 
 import java.util.ArrayList;
+import java.util.List;
 
 @Component
 public class Main implements CommandLineRunner {
@@ -61,6 +62,10 @@ public class Main implements CommandLineRunner {
         System.out.println("You are still " + distance + " away from your goal.\n");
 
         service.createIncomeStream(new IncomeStream(30000.00, "New Source", "New Name", "New Description"));
+
+        double minEarnings = 30000.0;
+        List<IncomeStream> filteredStreams = service.getIncomeStreamsByMinEarnings(minEarnings);
+        System.out.println("Income Streams with minimum earnings of $" + minEarnings + ": " + filteredStreams);
 
         service.updateIncomeStream(1L,
                 new IncomeStream(25000.00, "Updated Source", "Updated Name", "Updated Description"));
