@@ -16,6 +16,7 @@ public class IncomeStream {
     private String source;
     private String name;
     private String description;
+    private Long categoryId;
 
     public IncomeStream() {
     }
@@ -37,6 +38,15 @@ public class IncomeStream {
                 ", source='" + source + '\'' +
                 ", name='" + name + '\'' +
                 ", description='" + description + '\'' +
+                ", categoryId=" + categoryId +
                 '}';
+    }
+
+    public Long getCategoryId() {
+        return categoryId;
+    }
+
+    public void setCategoryId(Long categoryId) {
+        this.categoryId = categoryId;
     }
 }

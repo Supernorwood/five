@@ -42,6 +42,7 @@ public class IncomeStreamService {
             incomeStream.setName(incomeStreamDetails.getName());
             incomeStream.setDescription(incomeStreamDetails.getDescription());
             incomeStream.setUpdateDate(new Date());
+            incomeStream.setCategoryId(incomeStreamDetails.getCategoryId());
             System.out.println("Income Stream updated...");
             System.out.println(incomeStream);
             return incomeStream;

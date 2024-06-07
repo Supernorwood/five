@@ -15,6 +15,9 @@ public class Main implements CommandLineRunner {
     @Autowired
     private IncomeStreamService service;
 
+    @Autowired
+    private CategoryService categoryService;
+
     @Override
     public void run(String... args) {
         System.out.println("Hello five!");
@@ -61,7 +64,9 @@ public class Main implements CommandLineRunner {
         double distance = Math.max(0.0, GOAL_NUMBER - totalEarnings);
         System.out.println("You are still " + distance + " away from your goal.\n");
 
-        service.createIncomeStream(new IncomeStream(30000.00, "New Source", "New Name", "New Description"));
+        IncomeStream createdStream = service
+                .createIncomeStream(new IncomeStream(30000.00, "New Source", "New Name", "New Description"));
+        System.out.println("Created Income Stream: " + createdStream);
 
         double minEarnings = 30000.0;
         List<IncomeStream> filteredStreams = service.getIncomeStreamsByMinEarnings(minEarnings);
@@ -69,6 +74,21 @@ public class Main implements CommandLineRunner {
 
         service.updateIncomeStream(1L,
                 new IncomeStream(25000.00, "Updated Source", "Updated Name", "Updated Description"));
+
+        Category category1 = new Category("Freelance", "Income from freelance work");
+        Category category2 = new Category("Investments", "Income from investments");
+
+        categoryService.createCategory(category1);
+        categoryService.createCategory(category2);
+
+        List<Category> categories = categoryService.getAllCategories();
+        System.out.println("All Categories: " + categories);
+
+        createdStream.setCategoryId(category1.getId());
+        service.updateIncomeStream(createdStream.getId(), createdStream);
+
+        List<IncomeStream> incomeStreamList = service.getAllIncomeStreams();
+        System.out.println("All Income Streams with Categories: " + incomeStreamList);
 
         service.deleteIncomeStream(1L);
     }
