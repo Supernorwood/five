@@ -28,4 +28,17 @@ public class CategoryService {
         System.out.println(category);
         return category;
     }
+
+    public Optional<Category> updateCategory(Long id, Category categoryDetails) {
+        return getCategoryById(id).map(category -> {
+            category.setName(categoryDetails.getName());
+            category.setDescription(categoryDetails.getDescription());
+            return category;
+        });
+    }
+
+    public boolean deleteCategory(Long id) {
+        return categories.removeIf(category -> category.getId() == id);
+    }
+
 }

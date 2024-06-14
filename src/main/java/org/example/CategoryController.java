@@ -29,4 +29,16 @@ public class CategoryController {
     public Category createCategory(@RequestBody Category category) {
         return categoryService.createCategory(category);
     }
+
+    @PutMapping("/{id}")
+    public ResponseEntity<Category> updateCategory(@PathVariable Long id, @RequestBody Category categoryDetails) {
+        Optional<Category> updatedCategory = categoryService.updateCategory(id, categoryDetails);
+        return updatedCategory.map(ResponseEntity::ok).orElseGet(() -> ResponseEntity.notFound().build());
+    }
+
+    @DeleteMapping("/{id}")
+    public ResponseEntity<Void> deleteCategory(@PathVariable Long id) {
+        boolean isDeleted = categoryService.deleteCategory(id);
+        return isDeleted ? ResponseEntity.noContent().build() : ResponseEntity.notFound().build();
+    }
 }

@@ -90,6 +90,16 @@ public class Main implements CommandLineRunner {
         List<IncomeStream> incomeStreamList = service.getAllIncomeStreams();
         System.out.println("All Income Streams with Categories: " + incomeStreamList);
 
+        Category updatedCategory = new Category("Updated Freelance", "Updated income from freelance work");
+        categoryService.updateCategory(category1.getId(), updatedCategory);
+
+        categories = categoryService.getAllCategories();
+        System.out.println("All Categories after update: " + categories);
+
+        categoryService.deleteCategory(category2.getId());
+        categories = categoryService.getAllCategories();
+        System.out.println("All Categories after deletion: " + categories);
+
         service.deleteIncomeStream(1L);
     }
 }
