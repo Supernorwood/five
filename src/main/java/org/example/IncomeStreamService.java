@@ -20,8 +20,6 @@ public class IncomeStreamService {
     }
 
     public Optional<IncomeStream> getIncomeStreamById(Long id) {
-        System.out.println("Get Income Streams by Id");
-        System.out.println(incomeStreams.stream().filter(stream -> stream.getId() == id).findFirst());
         return incomeStreams.stream().filter(stream -> stream.getId() == id).findFirst();
     }
 
@@ -31,7 +29,7 @@ public class IncomeStreamService {
         incomeStream.setUpdateDate(new Date());
         incomeStreams.add(incomeStream);
         System.out.println("Income Stream created...");
-        System.out.println(incomeStreams);
+        System.out.println(incomeStream);
         return incomeStream;
     }
 
@@ -43,21 +41,30 @@ public class IncomeStreamService {
             incomeStream.setDescription(incomeStreamDetails.getDescription());
             incomeStream.setUpdateDate(new Date());
             incomeStream.setCategoryId(incomeStreamDetails.getCategoryId());
-            System.out.println("Income Stream updated...");
-            System.out.println(incomeStream);
             return incomeStream;
         });
     }
 
     public boolean deleteIncomeStream(Long id) {
-        System.out.println("Income Stream deleted with Id: " + id);
-        System.out.println(incomeStreams.removeIf(stream -> stream.getId() == id));
         return incomeStreams.removeIf(stream -> stream.getId() == id);
     }
 
     public List<IncomeStream> getIncomeStreamsByMinEarnings(double minEarnings) {
         return incomeStreams.stream()
                 .filter(stream -> stream.getEstimatedEarningsPerYear() >= minEarnings)
+                .collect(Collectors.toList());
+    }
+
+    public Optional<IncomeStream> assignCategoryToIncomeStream(Long id, Long categoryId) {
+        return getIncomeStreamById(id).map(incomeStream -> {
+            incomeStream.setCategoryId(categoryId);
+            return incomeStream;
+        });
+    }
+
+    public List<IncomeStream> getIncomeStreamsByCategoryId(Long categoryId) {
+        return incomeStreams.stream()
+                .filter(stream -> categoryId.equals(stream.getCategoryId()))
                 .collect(Collectors.toList());
     }
 }

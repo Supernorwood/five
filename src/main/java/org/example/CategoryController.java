@@ -14,6 +14,9 @@ public class CategoryController {
     @Autowired
     private CategoryService categoryService;
 
+    @Autowired
+    private IncomeStreamService incomeStreamService;
+
     @GetMapping
     public List<Category> getAllCategories() {
         return categoryService.getAllCategories();
@@ -40,5 +43,10 @@ public class CategoryController {
     public ResponseEntity<Void> deleteCategory(@PathVariable Long id) {
         boolean isDeleted = categoryService.deleteCategory(id);
         return isDeleted ? ResponseEntity.noContent().build() : ResponseEntity.notFound().build();
+    }
+
+    @GetMapping("/{id}/income-streams")
+    public List<IncomeStream> getIncomeStreamsByCategory(@PathVariable Long id) {
+        return incomeStreamService.getIncomeStreamsByCategoryId(id);
     }
 }

@@ -96,6 +96,16 @@ public class Main implements CommandLineRunner {
         categories = categoryService.getAllCategories();
         System.out.println("All Categories after update: " + categories);
 
+        // Assign category to income stream
+        service.assignCategoryToIncomeStream(createdStream.getId(), category1.getId());
+
+        List<IncomeStream> newIncomeStreamList = service.getAllIncomeStreams();
+        System.out.println("Assigned Category to Income Streams: " + newIncomeStreamList);
+
+        // Fetch income streams by category
+        List<IncomeStream> incomeStreamsByCategory = service.getIncomeStreamsByCategoryId(category1.getId());
+        System.out.println("Income Streams in category 'Freelance': " + incomeStreamsByCategory);
+
         categoryService.deleteCategory(category2.getId());
         categories = categoryService.getAllCategories();
         System.out.println("All Categories after deletion: " + categories);

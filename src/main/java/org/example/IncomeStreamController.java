@@ -47,4 +47,11 @@ public class IncomeStreamController {
         boolean isDeleted = service.deleteIncomeStream(id);
         return isDeleted ? ResponseEntity.noContent().build() : ResponseEntity.notFound().build();
     }
+
+    @PutMapping("/{id}/category")
+    public ResponseEntity<IncomeStream> assignCategoryToIncomeStream(@PathVariable Long id,
+            @RequestBody Long categoryId) {
+        Optional<IncomeStream> updatedIncomeStream = service.assignCategoryToIncomeStream(id, categoryId);
+        return updatedIncomeStream.map(ResponseEntity::ok).orElseGet(() -> ResponseEntity.notFound().build());
+    }
 }
