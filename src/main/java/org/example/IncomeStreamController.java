@@ -73,4 +73,10 @@ public class IncomeStreamController {
 
         return ResponseEntity.ok(percentage);
     }
+
+    @GetMapping("/average-earnings")
+    public ResponseEntity<Double> getAverageEstimatedEarnings() {
+        double averageEarnings = service.getAverageEstimatedEarnings();
+        return ResponseEntity.ok(averageEarnings);
+    }
 }

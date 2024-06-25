@@ -82,4 +82,11 @@ public class IncomeStreamService {
 
         return goal == 0 ? 0 : (totalEarnings / goal) * 100;
     }
+
+    public double getAverageEstimatedEarnings() {
+        return incomeStreams.stream()
+                .mapToDouble(IncomeStream::getEstimatedEarningsPerYear)
+                .average()
+                .orElse(0.0);
+    }
 }

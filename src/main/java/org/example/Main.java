@@ -72,6 +72,16 @@ public class Main implements CommandLineRunner {
         List<IncomeStream> filteredStreams = service.getIncomeStreamsByMinEarnings(minEarnings);
         System.out.println("Income Streams with minimum earnings of $" + minEarnings + ": " + filteredStreams);
 
+        String source = "SN";
+
+        System.out.println("Income Streams by Source: " + service.getIncomeStreamsBySource(source));
+
+        System.out.println("Total Estimated Earnings: $" + service.getTotalEstimatedEarnings());
+
+        System.out.println("Percentage Towards Goal: " + service.getPercentageTowardsGoal(GOAL_NUMBER));
+
+        System.out.println("Average Estimated Earnings: $" + service.getAverageEstimatedEarnings());
+
         service.updateIncomeStream(1L,
                 new IncomeStream(25000.00, "Updated Source", "Updated Name", "Updated Description"));
 
