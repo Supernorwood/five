@@ -67,4 +67,19 @@ public class IncomeStreamService {
                 .filter(stream -> categoryId.equals(stream.getCategoryId()))
                 .collect(Collectors.toList());
     }
+
+    public List<IncomeStream> getIncomeStreamsBySource(String source) {
+        return incomeStreams.stream().filter(stream -> stream.getSource().equalsIgnoreCase(source))
+                .collect(Collectors.toList());
+    }
+
+    public double getTotalEstimatedEarnings() {
+        return incomeStreams.stream().mapToDouble(IncomeStream::getEstimatedEarningsPerYear).sum();
+    }
+
+    public double getPercentageTowardsGoal(double goal) {
+        double totalEarnings = getTotalEstimatedEarnings();
+
+        return goal == 0 ? 0 : (totalEarnings / goal) * 100;
+    }
 }

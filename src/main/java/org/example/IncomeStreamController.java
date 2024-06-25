@@ -54,4 +54,23 @@ public class IncomeStreamController {
         Optional<IncomeStream> updatedIncomeStream = service.assignCategoryToIncomeStream(id, categoryId);
         return updatedIncomeStream.map(ResponseEntity::ok).orElseGet(() -> ResponseEntity.notFound().build());
     }
+
+    @GetMapping("/source")
+    public List<IncomeStream> getIncomeStreamsBySource(@RequestParam String source) {
+        return service.getIncomeStreamsBySource(source);
+    }
+
+    @GetMapping("/total-earnings")
+    public ResponseEntity<Double> getTotalEstimatedEarnings() {
+        double totalEarnings = service.getTotalEstimatedEarnings();
+
+        return ResponseEntity.ok(totalEarnings);
+    }
+
+    @GetMapping("/goal-percentage")
+    public ResponseEntity<Double> getPercentageTowardsGoal(@RequestParam double goal) {
+        double percentage = service.getPercentageTowardsGoal(goal);
+
+        return ResponseEntity.ok(percentage);
+    }
 }
