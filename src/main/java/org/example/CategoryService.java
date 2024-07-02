@@ -24,8 +24,8 @@ public class CategoryService {
     public Category createCategory(Category category) {
         category.setId(counter.incrementAndGet());
         categories.add(category);
-        System.out.println("Category created...");
-        System.out.println(category);
+        System.out.println("    Category created... \n");
+        System.out.println("    " + category + "\n");
         return category;
     }
 

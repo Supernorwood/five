@@ -28,8 +28,8 @@ public class IncomeStreamService {
         incomeStream.setInsertDate(new Date());
         incomeStream.setUpdateDate(new Date());
         incomeStreams.add(incomeStream);
-        System.out.println("Income Stream created...");
-        System.out.println(incomeStream);
+        System.out.println("    Income Stream created... \n");
+        System.out.println("    " + incomeStream + "\n");
         return incomeStream;
     }
 
@@ -88,5 +88,9 @@ public class IncomeStreamService {
                 .mapToDouble(IncomeStream::getEstimatedEarningsPerYear)
                 .average()
                 .orElse(0.0);
+    }
+
+    public long getIncomeStreamCount() {
+        return incomeStreams.size();
     }
 }

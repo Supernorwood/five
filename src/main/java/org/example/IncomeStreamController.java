@@ -79,4 +79,10 @@ public class IncomeStreamController {
         double averageEarnings = service.getAverageEstimatedEarnings();
         return ResponseEntity.ok(averageEarnings);
     }
+
+    @GetMapping("/count")
+    public ResponseEntity<Long> getIncomeStreamCount() {
+        long count = service.getIncomeStreamCount();
+        return ResponseEntity.ok(count);
+    }
 }
