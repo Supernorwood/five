@@ -16,7 +16,13 @@ public class Main implements CommandLineRunner {
     private IncomeStreamService service;
 
     @Autowired
+    private ExpenseStreamService expenseStreamService;
+
+    @Autowired
     private CategoryService categoryService;
+
+    @Autowired
+    private BudgetController budgetService;
 
     @Override
     public void run(String... args) {
@@ -125,6 +131,37 @@ public class Main implements CommandLineRunner {
         categoryService.deleteCategory(category2.getId());
         categories = categoryService.getAllCategories();
         System.out.println("All Categories after deletion: \n" + categories + "\n");
+
+        // budgets
+        Budget budget1 = new Budget(5000.00, "Marketing", "Budget for marketing campaigns");
+        Budget budget2 = new Budget(10000.00, "Operations", "Budget for operational expenses");
+
+        budgetService.createBudget(budget1);
+        budgetService.createBudget(budget2);
+
+        List<Budget> budgets = budgetService.getAllBudgets();
+        System.out.println("All Budgets: \n" + budgets + "\n");
+
+        Budget updatedBudget = new Budget(15000.00, "Operations", "Updated budget for operational expenses");
+        budgetService.updateBudget(budget2.getId(), updatedBudget);
+
+        budgets = budgetService.getAllBudgets();
+        System.out.println("All Budgets after update: \n" + budgets + "\n");
+
+        budgetService.deleteBudget(budget1.getId());
+        budgets = budgetService.getAllBudgets();
+        System.out.println("All Budgets after deletion: \n" + budgets + "\n");
+
+        ExpenseStream expenseStream = expenseStreamService.createExpenseStream(
+                new ExpenseStream(2000.00, "Software", "Purchase software licenses"));
+
+        createdStream.setBudgetId(budget2.getId());
+        expenseStream.setBudgetId(budget2.getId());
+        budgetService.addIncomeStreamToBudget(budget2.getId(), createdStream.getId());
+        budgetService.addExpenseStreamToBudget(budget2.getId(), expenseStream.getId());
+
+        budgets = budgetService.getAllBudgets();
+        System.out.println("All Budgets with connections: \n" + budgets + "\n");
 
         service.deleteIncomeStream(1L);
         System.out.println("Deleted Income Stream with ID 1\n");

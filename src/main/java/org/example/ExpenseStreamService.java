@@ -36,6 +36,7 @@ public class ExpenseStreamService {
             expenseStream.setCategory(expenseStreamDetails.getCategory());
             expenseStream.setDescription(expenseStreamDetails.getDescription());
             expenseStream.setUpdateDate(new Date());
+            expenseStream.setBudgetId(expenseStreamDetails.getBudgetId());
             return expenseStream;
         });
     }

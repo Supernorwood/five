@@ -5,6 +5,8 @@ import lombok.Setter;
 
 import java.util.Date;
 
+import jakarta.annotation.Nullable;
+
 @Getter
 @Setter
 public class IncomeStream {
@@ -17,6 +19,9 @@ public class IncomeStream {
     private String name;
     private String description;
     private Long categoryId;
+
+    @Nullable
+    private Long budgetId;
 
     public IncomeStream() {
     }
@@ -39,6 +44,7 @@ public class IncomeStream {
                 ", name='" + name + '\'' +
                 ", description='" + description + '\'' +
                 ", categoryId=" + categoryId +
+                ", budgetId=" + budgetId +
                 '}';
     }
 
@@ -48,5 +54,13 @@ public class IncomeStream {
 
     public void setCategoryId(Long categoryId) {
         this.categoryId = categoryId;
+    }
+
+    public Long getBudgetId() {
+        return budgetId;
+    }
+
+    public void setBudgetId(Long budgetId) {
+        this.budgetId = budgetId;
     }
 }

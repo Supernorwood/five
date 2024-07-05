@@ -28,8 +28,6 @@ public class IncomeStreamService {
         incomeStream.setInsertDate(new Date());
         incomeStream.setUpdateDate(new Date());
         incomeStreams.add(incomeStream);
-        System.out.println("    Income Stream created... \n");
-        System.out.println("    " + incomeStream + "\n");
         return incomeStream;
     }
 
@@ -41,6 +39,7 @@ public class IncomeStreamService {
             incomeStream.setDescription(incomeStreamDetails.getDescription());
             incomeStream.setUpdateDate(new Date());
             incomeStream.setCategoryId(incomeStreamDetails.getCategoryId());
+            incomeStream.setBudgetId(incomeStreamDetails.getBudgetId());
             return incomeStream;
         });
     }
