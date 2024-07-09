@@ -1,3 +1,5 @@
+Here's the updated README with the latest changes and detailed steps on how to run the code:
+
 ## Write Code, Get Money, Repeat
 
 Tracking income across streams can be a chore. That's why I built the Half a Milli Dashboard.
@@ -49,8 +51,8 @@ It's more than a paycheck tracker; it's about intention and action.
 1. **Clone the Repository:**
 
    ```bash
-   git clone https://github.com/Supernorwood/five
-   cd five
+   git clone [[https://github.com/Supernorwood/five](https://github.com/Supernorwood/five)]
+   cd [five]
    ```
 
 2. **Build the Project:**
@@ -82,17 +84,96 @@ It's more than a paycheck tracker; it's about intention and action.
    curl -X GET "http://localhost:8080/income-streams"
    ```
 
-3. **Update an Income Stream:**
+3. **Get Income Streams by Minimum Earnings:**
 
    ```bash
-   curl -X PUT "http://localhost:8080/income-streams/1" -H "Content-Type: application/json" -d '{"estimatedEarningsPerYear":25000.00, "source":"Updated Source", "name":"Updated Name", "description":"Updated Description"}'
+   curl -X GET "http://localhost:8080/income-streams/filter?minEarnings=20000"
    ```
 
-4. **Delete an Income Stream:**
+4. **Get Income Streams by Source:**
+
    ```bash
-   curl -X DELETE "http://localhost:8080/income-streams/1"
+   curl -X GET "http://localhost:8080/income-streams/source?source=E-commerce Store"
    ```
+
+5. **Get Total Estimated Earnings:**
+
+   ```bash
+   curl -X GET "http://localhost:8080/income-streams/total-earnings"
+   ```
+
+6. **Get Percentage Towards Goal:**
+
+   ```bash
+   curl -X GET "http://localhost:8080/income-streams/goal-percentage?goal=500000"
+   ```
+
+7. **Get Average Estimated Earnings:**
+
+   ```bash
+   curl -X GET "http://localhost:8080/income-streams/average-earnings"
+   ```
+
+8. **Get Income Stream Count:**
+
+   ```bash
+   curl -X GET "http://localhost:8080/income-streams/count"
+   ```
+
+9. **Update an Income Stream:**
+
+```bash
+curl -X PUT "http://localhost:8080/income-streams/1" -H "Content-Type: application/json" -d '{"estimatedEarningsPerYear":25000.00, "source":"Updated Source", "name":"Updated Name", "description":"Updated Description"}'
+```
+
+10. **Delete an Income Stream:**
+
+```bash
+curl -X DELETE "http://localhost:8080/income-streams/1"
+```
+
+11. **Create a Budget:**
+
+```bash
+curl -X POST "http://localhost:8080/budgets" -H "Content-Type: application/json" -d '{"allocation":5000.00, "category":"Marketing", "description":"Budget for marketing campaigns"}'
+```
+
+12. **Get All Budgets:**
+
+```bash
+curl -X GET "http://localhost:8080/budgets"
+```
+
+13. **Update a Budget:**
+
+```bash
+curl -X PUT "http://localhost:8080/budgets/1" -H "Content-Type: application/json" -d '{"allocation":15000.00, "category":"Operations", "description":"Updated budget for operational expenses"}'
+```
+
+14. **Delete a Budget:**
+
+```bash
+curl -X DELETE "http://localhost:8080/budgets/1"
+```
+
+15. **Get Income Streams by Budget:**
+
+```bash
+curl -X GET "http://localhost:8080/budgets/1/income-streams"
+```
+
+16. **Get Expense Streams by Budget:**
+
+```bash
+curl -X GET "http://localhost:8080/budgets/1/expense-streams"
+```
+
+17. **Get Total Allocation by Budget:**
+
+```bash
+curl -X GET "http://localhost:8080/budgets/1/total-allocation"
+```
 
 ## Follow the Execution:
 
-- GitHub: [Supernorwood](https://github.com/Supernorwood/five)
+- GitHub: [[Supernorwood](https://github.com/Supernorwood/five)]
