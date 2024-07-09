@@ -1,11 +1,11 @@
 package org.example;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.stereotype.Component;
-
-import java.util.ArrayList;
-import java.util.List;
 
 @Component
 public class Main implements CommandLineRunner {
@@ -22,7 +22,7 @@ public class Main implements CommandLineRunner {
     private CategoryService categoryService;
 
     @Autowired
-    private BudgetController budgetService;
+    private BudgetService budgetService;
 
     @Override
     public void run(String... args) {
@@ -162,6 +162,17 @@ public class Main implements CommandLineRunner {
 
         budgets = budgetService.getAllBudgets();
         System.out.println("All Budgets with connections: \n" + budgets + "\n");
+
+        List<IncomeStream> incomeStreamsByBudget = budgetService
+                .getIncomeStreamsByBudget(budget2.getId());
+        System.out.println("Income Streams for Budget ID " + budget2.getId() + ": \n" + incomeStreamsByBudget + "\n");
+
+        List<ExpenseStream> expenseStreamsByBudget = budgetService
+                .getExpenseStreamsByBudget(budget2.getId());
+        System.out.println("Expense Streams for Budget ID " + budget2.getId() + ": \n" + expenseStreamsByBudget + "\n");
+
+        double totalAllocation = budgetService.getTotalAllocationByBudget(budget2.getId());
+        System.out.println("Total Allocation for Budget ID " + budget2.getId() + ": $" + totalAllocation + "\n");
 
         service.deleteIncomeStream(1L);
         System.out.println("Deleted Income Stream with ID 1\n");
