@@ -51,7 +51,6 @@ public class Main implements CommandLineRunner {
 
         System.out.println("Updated list of income streams: " + incomeStreams + "\n");
 
-        // Calculate total estimated earnings
         double totalEarnings = 0.0;
         for (IncomeStream incomeStream : incomeStreams) {
             totalEarnings += incomeStream.getEstimatedEarningsPerYear();
@@ -117,14 +116,12 @@ public class Main implements CommandLineRunner {
         categories = categoryService.getAllCategories();
         System.out.println("All Categories after update: \n" + categories + "\n");
 
-        // Assign category to income stream
         service.assignCategoryToIncomeStream(createdStream.getId(), category1.getId());
         System.out.println("Assigned Category to Income Stream: \n" + createdStream + "\n");
 
         List<IncomeStream> newIncomeStreamList = service.getAllIncomeStreams();
         System.out.println("Updated list of Income Streams after assigning category: \n" + newIncomeStreamList + "\n");
 
-        // Fetch income streams by category
         List<IncomeStream> incomeStreamsByCategory = service.getIncomeStreamsByCategoryId(category1.getId());
         System.out.println("Income Streams in category 'Freelance': \n" + incomeStreamsByCategory + "\n");
 
@@ -132,7 +129,6 @@ public class Main implements CommandLineRunner {
         categories = categoryService.getAllCategories();
         System.out.println("All Categories after deletion: \n" + categories + "\n");
 
-        // budgets
         Budget budget1 = new Budget(5000.00, "Marketing", "Budget for marketing campaigns");
         Budget budget2 = new Budget(10000.00, "Operations", "Budget for operational expenses");
 
@@ -152,27 +148,43 @@ public class Main implements CommandLineRunner {
         budgets = budgetService.getAllBudgets();
         System.out.println("All Budgets after deletion: \n" + budgets + "\n");
 
-        ExpenseStream expenseStream = expenseStreamService.createExpenseStream(
+        ExpenseStream expenseStream1 = expenseStreamService.createExpenseStream(
                 new ExpenseStream(2000.00, "Software", "Purchase software licenses"));
 
+        ExpenseStream expenseStream2 = expenseStreamService.createExpenseStream(
+                new ExpenseStream(1500.00, "Marketing", "Social media ads"));
+
         createdStream.setBudgetId(budget2.getId());
-        expenseStream.setBudgetId(budget2.getId());
+        expenseStream1.setBudgetId(budget2.getId());
+        expenseStream2.setBudgetId(budget2.getId());
         budgetService.addIncomeStreamToBudget(budget2.getId(), createdStream.getId());
-        budgetService.addExpenseStreamToBudget(budget2.getId(), expenseStream.getId());
+        budgetService.addExpenseStreamToBudget(budget2.getId(), expenseStream1.getId());
+        budgetService.addExpenseStreamToBudget(budget2.getId(), expenseStream2.getId());
 
         budgets = budgetService.getAllBudgets();
         System.out.println("All Budgets with connections: \n" + budgets + "\n");
 
-        List<IncomeStream> incomeStreamsByBudget = budgetService
-                .getIncomeStreamsByBudget(budget2.getId());
+        List<IncomeStream> incomeStreamsByBudget = budgetService.getIncomeStreamsByBudget(budget2.getId());
         System.out.println("Income Streams for Budget ID " + budget2.getId() + ": \n" + incomeStreamsByBudget + "\n");
 
-        List<ExpenseStream> expenseStreamsByBudget = budgetService
-                .getExpenseStreamsByBudget(budget2.getId());
+        List<ExpenseStream> expenseStreamsByBudget = budgetService.getExpenseStreamsByBudget(budget2.getId());
         System.out.println("Expense Streams for Budget ID " + budget2.getId() + ": \n" + expenseStreamsByBudget + "\n");
 
         double totalAllocation = budgetService.getTotalAllocationByBudget(budget2.getId());
         System.out.println("Total Allocation for Budget ID " + budget2.getId() + ": $" + totalAllocation + "\n");
+
+        double minAmount = 1000.0;
+        List<ExpenseStream> filteredExpenseStreams = expenseStreamService.getExpenseStreamsByMinAmount(minAmount);
+        System.out.println(
+                "Expense Streams with minimum amount of $" + minAmount + ": \n" + filteredExpenseStreams + "\n");
+
+        String expenseCategory = "Software";
+        List<ExpenseStream> expenseStreamsByCategory = expenseStreamService
+                .getExpenseStreamsByCategory(expenseCategory);
+        System.out.println("Expense Streams by Category (" + expenseCategory + "): " + expenseStreamsByCategory + "\n");
+
+        double totalExpenses = expenseStreamService.getTotalExpenses();
+        System.out.println("Total Expenses: $" + totalExpenses + "\n");
 
         service.deleteIncomeStream(1L);
         System.out.println("Deleted Income Stream with ID 1\n");

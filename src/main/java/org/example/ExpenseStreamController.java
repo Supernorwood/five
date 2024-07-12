@@ -42,4 +42,20 @@ public class ExpenseStreamController {
         boolean isDeleted = service.deleteExpenseStream(id);
         return isDeleted ? ResponseEntity.noContent().build() : ResponseEntity.notFound().build();
     }
+
+    @GetMapping("/filter")
+    public List<ExpenseStream> getExpenseStreamsByMinAmount(@RequestParam double minAmount) {
+        return service.getExpenseStreamsByMinAmount(minAmount);
+    }
+
+    @GetMapping("/category")
+    public List<ExpenseStream> getExpenseStreamsByCategory(@RequestParam String category) {
+        return service.getExpenseStreamsByCategory(category);
+    }
+
+    @GetMapping("/total-expenses")
+    public ResponseEntity<Double> getTotalExpenses() {
+        double totalExpenses = service.getTotalExpenses();
+        return ResponseEntity.ok(totalExpenses);
+    }
 }

@@ -7,6 +7,7 @@ import java.util.Date;
 import java.util.List;
 import java.util.Optional;
 import java.util.concurrent.atomic.AtomicLong;
+import java.util.stream.Collectors;
 
 @Service
 public class ExpenseStreamService {
@@ -43,5 +44,21 @@ public class ExpenseStreamService {
 
     public boolean deleteExpenseStream(Long id) {
         return expenseStreams.removeIf(stream -> stream.getId() == id);
+    }
+
+    public List<ExpenseStream> getExpenseStreamsByMinAmount(double minAmount) {
+        return expenseStreams.stream()
+                .filter(stream -> stream.getAmount() >= minAmount)
+                .collect(Collectors.toList());
+    }
+
+    public List<ExpenseStream> getExpenseStreamsByCategory(String category) {
+        return expenseStreams.stream()
+                .filter(stream -> stream.getCategory().equalsIgnoreCase(category))
+                .collect(Collectors.toList());
+    }
+
+    public double getTotalExpenses() {
+        return expenseStreams.stream().mapToDouble(ExpenseStream::getAmount).sum();
     }
 }
