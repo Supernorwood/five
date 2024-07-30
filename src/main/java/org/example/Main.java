@@ -1,5 +1,6 @@
 package org.example;
 
+import java.text.ParseException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -25,7 +26,7 @@ public class Main implements CommandLineRunner {
     private BudgetService budgetService;
 
     @Override
-    public void run(String... args) {
+    public void run(String... args) throws ParseException {
         System.out.println("Starting the Half a Milli Dashboard...\n");
 
         IncomeStream stream1 = new IncomeStream(10000.00, "Natgo", "Job", "java job");

@@ -4,15 +4,17 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.Date;
 import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 @RestController
 @RequestMapping("/income-streams")
 public class IncomeStreamController {
 
     @Autowired
-    private IncomeStreamService service;
+    private static IncomeStreamService service;
 
     @GetMapping
     public List<IncomeStream> getAllIncomeStreams() {
@@ -84,5 +86,25 @@ public class IncomeStreamController {
     public ResponseEntity<Long> getIncomeStreamCount() {
         long count = service.getIncomeStreamCount();
         return ResponseEntity.ok(count);
+    }
+
+    @GetMapping("/category")
+    public List<IncomeStream> getIncomeStreamsByCategory(@RequestParam Long categoryId) {
+        return service.getIncomeStreamsByCategoryId(categoryId);
+    }
+
+    @GetMapping("/total")
+    public ResponseEntity<Long> getTotalIncomeStreams() {
+        long totalIncomeStreams = service.getAllIncomeStreams().size();
+        return ResponseEntity.ok(totalIncomeStreams);
+    }
+
+    @GetMapping("/date-range")
+    public ResponseEntity<List<IncomeStream>> getIncomeStreamsByDateRange(
+            @RequestParam("startDate") Date startDate, @RequestParam("endDate") Date endDate) {
+        List<IncomeStream> incomeStreams = service.getAllIncomeStreams().stream()
+                .filter(stream -> stream.getInsertDate().after(startDate) && stream.getInsertDate().before(endDate))
+                .collect(Collectors.toList());
+        return ResponseEntity.ok(incomeStreams);
     }
 }

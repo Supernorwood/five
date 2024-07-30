@@ -1,5 +1,6 @@
 package org.example;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
@@ -61,4 +62,5 @@ public class ExpenseStreamService {
     public double getTotalExpenses() {
         return expenseStreams.stream().mapToDouble(ExpenseStream::getAmount).sum();
     }
+
 }
