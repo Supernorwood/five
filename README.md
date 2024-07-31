@@ -49,7 +49,7 @@ It's more than a paycheck tracker; it's about intention and action.
 1. **Clone the Repository:**
 
    ```bash
-   git clone [https://github.com/Supernorwood/five](https://github.com/Supernorwood/five)
+   git clone https://github.com/Supernorwood/five
    cd five
    ```
 
